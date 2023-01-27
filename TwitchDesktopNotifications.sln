@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchDesktopNotifications", "TwitchDesktopNotifications\TwitchDesktopNotifications.csproj", "{323F3EBC-C1B1-4DDE-9069-5A65EDA4EB16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{323F3EBC-C1B1-4DDE-9069-5A65EDA4EB16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323F3EBC-C1B1-4DDE-9069-5A65EDA4EB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323F3EBC-C1B1-4DDE-9069-5A65EDA4EB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323F3EBC-C1B1-4DDE-9069-5A65EDA4EB16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE540A21-E905-4833-8D6A-01F7B31156C7}
+	EndGlobalSection
+EndGlobal
