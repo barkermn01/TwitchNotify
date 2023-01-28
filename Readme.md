@@ -11,10 +11,17 @@ Want to contribute? Great!
 
 Project is built using Visual Studios 2022,
 
-You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console) replace lines 15 and 16 in TwitchFetcher.cs
-```pwsh
-TwitchClientID = "";
-TwitchClientSecret = "";
+You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console)
+Add a new C# Class to the project named `TwitchDetails.cs` add the following code with your ID and Secret
+```cs
+namespace TwitchDesktopNotifications
+{
+    static public class TwitchDetails
+    {
+        public static string TwitchClientID = "";
+        public static string TwitchClientSecret = "";
+    }
+}
 ```
 
 ### CommunityToolkit 8.0.0 Pre-release

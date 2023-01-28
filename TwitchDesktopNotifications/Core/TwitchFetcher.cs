@@ -12,14 +12,9 @@ namespace TwitchDesktopNotifications.Core
     internal class TwitchFetcher
     {
         private TwitchFetcher() {
-            TwitchClientID = "";
-            TwitchClientSecret = "";
         }
 
         public static TwitchFetcher instance { get; private set; }
-
-        string TwitchClientID = "";
-        string TwitchClientSecret = "";
 
         List <StreamsData> currentlyLive = null;
 
@@ -60,7 +55,7 @@ namespace TwitchDesktopNotifications.Core
             WebRequest request = WebRequest.Create("https://api.twitch.tv/" + endpoint);
             request.Method = "GET";
             request.Headers[HttpRequestHeader.Authorization] = String.Format("Bearer {0}", DataStore.GetInstance().Store.Authentication.AccessToken);
-            request.Headers["Client-ID"] = TwitchClientID;
+            request.Headers["Client-ID"] = TwitchDetails.TwitchClientID;
             WebResponse response = request.GetResponse();
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
@@ -139,8 +134,8 @@ namespace TwitchDesktopNotifications.Core
         {
             Dictionary<string, string> postData = new Dictionary<string, string>();
 
-            postData["client_id"] = TwitchClientID;
-            postData["client_secret"] = TwitchClientSecret;
+            postData["client_id"] = TwitchDetails.TwitchClientID;
+            postData["client_secret"] = TwitchDetails.TwitchClientSecret;
             postData["grant_type"] = "refresh_token";
             postData["refresh_token"] = DataStore.GetInstance().Store.Authentication.RefreshToken;
 
@@ -173,7 +168,7 @@ namespace TwitchDesktopNotifications.Core
             WebServer.GetInstance().TwitchState = guid;
             Process myProcess = new Process();
             myProcess.StartInfo.UseShellExecute = true;
-            myProcess.StartInfo.FileName = String.Format("https://id.twitch.tv/oauth2/authorize?&redirect_uri=http://localhost:32584/twitchRedirect&scope=user:read:subscriptions%20user:read:follows%20user:read:email%20openid&response_type=code&state={0}&nonce={1}&client_id={2}", guid, guid, TwitchClientID);
+            myProcess.StartInfo.FileName = String.Format("https://id.twitch.tv/oauth2/authorize?&redirect_uri=http://localhost:32584/twitchRedirect&scope=user:read:subscriptions%20user:read:follows%20user:read:email%20openid&response_type=code&state={0}&nonce={1}&client_id={2}", guid, guid, TwitchDetails.TwitchClientID);
             myProcess.Start();
         }
 
@@ -181,8 +176,8 @@ namespace TwitchDesktopNotifications.Core
         {
             Dictionary<string, string> postData = new Dictionary<string, string>();
 
-            postData["client_id"] = TwitchClientID;
-            postData["client_secret"] = TwitchClientSecret;
+            postData["client_id"] = TwitchDetails.TwitchClientID;
+            postData["client_secret"] = TwitchDetails.TwitchClientSecret;
             postData["grant_type"] = "authorization_code";
             postData["redirect_uri"] = "http://localhost:32584/twitchRedirect";
             postData["code"] = code;

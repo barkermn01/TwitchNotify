@@ -22,10 +22,18 @@ namespace TwitchDesktopNotifications.Core
 
                 try
                 {
-                    Process myProcess = new Process();
-                    myProcess.StartInfo.UseShellExecute = true;
-                    myProcess.StartInfo.FileName = args["streamerUrl"];
-                    myProcess.Start();
+                    if ( 
+                        // action is defined and set to watch
+                        ( args.Contains("action") && args["action"] == "watch" )
+                    ||
+                        // action is not defined so the user just generally clicked on the notification
+                        !args.Contains("action")
+                    ){
+                        Process myProcess = new Process();
+                        myProcess.StartInfo.UseShellExecute = true;
+                        myProcess.StartInfo.FileName = args["streamerUrl"];
+                        myProcess.Start();
+                    }
                 }catch(Exception ex) { }
             };
         }
