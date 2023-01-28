@@ -1,5 +1,5 @@
 # Twitch Notify
-## not affiliated with Twitch or Amazon
+## Not affiliated with Twitch or Amazon
 
 ## Installation
  Twitch Notify Requires [.NET 6 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.13-windows-x64-installer).
