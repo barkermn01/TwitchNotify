@@ -13,15 +13,13 @@ Want to contribute? Great!
 
 Project is built using Visual Studios 2022, must have Windows 10.0.17763 SDK installed
 
-You must create a `App.config` file inside `TwitchDesktopNotifications` project.
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-	<appSettings>
-		<add key="TwitchClientID" value="" />
-		<add key="TwitchClientSecret" value="" />
-	</appSettings>
-</configuration>
+You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console) once you have them
+Open the project in Visual Studio 2022 go to the Developer Powershell and then run the following commands, remembering to replace the `{You Twitch Applciations Client ID}` and `{You Twitch Applciations Client Secret}` with the appropriate information from your [Twitch Developer Console](https://dev.twitch.tv/console)
+```pwsh
+cd TwitchDesktopNotifications
+dotnet user-secrets init
+dotnet user-secret set TwitchClientID {You Twitch Applciation's Client ID}
+dotnet user-secret set TwitchClientSecret {You Twitch Applciation's Client Secret}
 ```
 
 ## License

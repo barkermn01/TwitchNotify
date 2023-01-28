@@ -1,32 +1,28 @@
 ﻿using ABI.System;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
 using System.Web;
 using TwitchDesktopNotifications.JsonStructure;
 using TwitchDesktopNotifications.JsonStructure.Helix;
-using Windows.ApplicationModel.Background;
 
 namespace TwitchDesktopNotifications.Core
 {
     internal class TwitchFetcher
     {
-        private TwitchFetcher() { }
+        private TwitchFetcher() {
+            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+            TwitchClientID = config["TwitchClientID"];
+            TwitchClientSecret = config["TwitchClientSecret"];
+        }
 
         public static TwitchFetcher instance { get; private set; }
 
-        string TwitchClientID = ConfigurationManager.AppSettings["TwitchClientID"];
-        string TwitchClientSecret = ConfigurationManager.AppSettings["TwitchClientSecret"];
+        string TwitchClientID = "";
+        string TwitchClientSecret = "";
 
         List <StreamsData> currentlyLive = null;
 
