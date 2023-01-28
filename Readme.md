@@ -13,13 +13,10 @@ Want to contribute? Great!
 
 Project is built using Visual Studios 2022, must have Windows 10.0.17763 SDK installed
 
-You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console) once you have them
-Open the project in Visual Studio 2022 go to the Developer Powershell and then run the following commands, remembering to replace the `{You Twitch Applciations Client ID}` and `{You Twitch Applciations Client Secret}` with the appropriate information from your [Twitch Developer Console](https://dev.twitch.tv/console)
+You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console) replace lines 15 and 16 in TwitchFetcher.cs
 ```pwsh
-cd TwitchDesktopNotifications
-dotnet user-secrets init
-dotnet user-secret set TwitchClientID {You Twitch Applciation's Client ID}
-dotnet user-secret set TwitchClientSecret {You Twitch Applciation's Client Secret}
+TwitchClientID = "";
+TwitchClientSecret = "";
 ```
 
 ## License

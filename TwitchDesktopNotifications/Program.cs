@@ -60,14 +60,9 @@ internal class Program
         TwitchFetcher.GetInstance().BeginConnection();
         if (DataStore.GetInstance().Store.Authentication == null)
         {
-            var timerForCrash = new PeriodicTimer(TimeSpan.FromSeconds(10));
-            await timerForCrash.WaitForNextTickAsync();
             if (isConnecting)
             {
-                MessageBox.Show("Twitch Connection not authenticated Exiting for saftey.", "Twitch Notify");
-                notifyIcon.Visible = false;
-                notifyIcon.Dispose();
-                Environment.Exit(1);
+                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
             }
         }
     }
@@ -101,7 +96,10 @@ internal class Program
                 while (true)
                 {
                     Thread.Sleep(10000);
-                    TwitchFetcher.GetInstance().GetLiveFollowingUsers();
+                    if (DataStore.GetInstance().Store != null)
+                    {
+                        TwitchFetcher.GetInstance().GetLiveFollowingUsers();
+                    }
                 }
             }).Start();
 

@@ -47,6 +47,10 @@ namespace TwitchDesktopNotifications.Core
 
         private T MakeRequest<T>(string endpoint)
         {
+            if (DataStore.GetInstance().Store == null)
+            {
+                throw new Exception("Not Authenticated");
+            }
             
             if (DataStore.GetInstance().Store.Authentication.ExpiresAsDate <= DateTime.UtcNow)
             {
@@ -76,7 +80,7 @@ namespace TwitchDesktopNotifications.Core
                 DataStore.GetInstance().Save();
             }catch(System.Exception ex)
             {
-                Environment.Exit(1);
+                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
             }
         }
 
@@ -87,7 +91,7 @@ namespace TwitchDesktopNotifications.Core
                 return MakeRequest<User>("helix/users?id=" + user_id).Data[0];
             }catch(System.Exception ex)
             {
-                Environment.Exit(1);
+                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
             }
             return null;
         }
@@ -127,7 +131,7 @@ namespace TwitchDesktopNotifications.Core
                 currentlyLive = following.Data;
             }catch(System.Exception ex)
             {
-                Environment.Exit(1);
+                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
             }
 }
 
