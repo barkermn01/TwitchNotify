@@ -9,6 +9,7 @@ using System.IO;
 using Windows.Foundation.Collections;
 using System.Diagnostics;
 using System.ComponentModel;
+using Windows.UI.Notifications;
 
 namespace TwitchDesktopNotifications.Core
 {
@@ -57,7 +58,10 @@ namespace TwitchDesktopNotifications.Core
 
             // download there profile picture
             string fileNameProfilePic = profilePic.Split("/").Last();
-            (new WebClient()).DownloadFile(new Uri(profilePic), FilePath+"/"+ fileNameProfilePic);
+            if (!File.Exists(FilePath + "/" + fileNameProfilePic))
+            {
+                (new WebClient()).DownloadFile(new Uri(profilePic), FilePath + "/" + fileNameProfilePic);
+            }
 
             // download there profile picture
             string fileNameThumbnailPic = streamThumbnail.Split("/").Last();
@@ -67,6 +71,7 @@ namespace TwitchDesktopNotifications.Core
 
             var builder = new ToastContentBuilder()
                 .AddArgument("streamerUrl", streamerUrl)
+                .AddArgument("thumbnail_path", FilePath + "/" + fileNameThumbnailPic)
                 .AddText(streamerName + " is now live on Twitch")
                 .AddHeroImage(new Uri("file://" + (FilePath + "/" + fileNameThumbnailPic).Replace("\\", "/")))
                 .AddAppLogoOverride(new Uri("file://" + (FilePath + "/" + fileNameProfilePic).Replace("\\", "/")), ToastGenericAppLogoCrop.Circle)
@@ -85,9 +90,14 @@ namespace TwitchDesktopNotifications.Core
             builder.Show(toast =>
             {
                 toast.ExpirationTime = DateTime.Now.AddSeconds(15);
+                toast.Dismissed += (ToastNotification sender, ToastDismissedEventArgs args) =>
+                {
+                    try
+                    {
+                        File.Delete(FilePath + "/" + fileNameThumbnailPic);
+                    }catch(Exception) { }
+                };
             });
         }
-
-
     }
 }
