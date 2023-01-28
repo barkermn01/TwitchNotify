@@ -97,6 +97,14 @@ namespace TwitchDesktopNotifications.Core
                         File.Delete(FilePath + "/" + fileNameThumbnailPic);
                     }catch(Exception) { }
                 };
+                toast.Activated += (ToastNotification sender, object args) =>
+                {
+                    try
+                    {
+                        File.Delete(FilePath + "/" + fileNameThumbnailPic);
+                    }
+                    catch (Exception) { }
+                };
             });
         }
     }
