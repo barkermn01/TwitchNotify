@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Drawing;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Controls;
@@ -17,7 +18,6 @@ internal class Program
 
     private static NotifyIcon notifyIcon;
     private static ContextMenuStrip cms;
-
 
     public static void Ws_CodeRecived(object? sender, EventArgs e)
     {
@@ -74,36 +74,42 @@ internal class Program
 
     private static async Task Main(string[] args)
     {
-        var timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
-
-        notifyIcon = new NotifyIcon();
-        notifyIcon.Icon = new Icon("Assets/icon.ico");
-        notifyIcon.Text = "Notify";
-
-        cms = new ContextMenuStrip();
-
-        cms.Items.Add(new ToolStripMenuItem("Reconnect", null, new EventHandler(Reconnect_Click)));
-        cms.Items.Add(new ToolStripSeparator());
-        cms.Items.Add(new ToolStripMenuItem("Quit", null, new EventHandler(Quit_Click), "Quit"));
-
-        notifyIcon.ContextMenuStrip = cms;
-        notifyIcon.Visible = true;
-
-        if (DataStore.GetInstance().Store.Authentication == null)
+        try
         {
-            TriggerAuthentication();
-        }
+            var timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
 
-        new Thread(() =>
-        {
-            while (true)
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = new Icon("Assets/icon.ico");
+            notifyIcon.Text = "Twitch Notify";
+
+            cms = new ContextMenuStrip();
+
+            cms.Items.Add(new ToolStripMenuItem("Reconnect", null, new EventHandler(Reconnect_Click)));
+            cms.Items.Add(new ToolStripSeparator());
+            cms.Items.Add(new ToolStripMenuItem("Quit", null, new EventHandler(Quit_Click), "Quit"));
+
+            notifyIcon.ContextMenuStrip = cms;
+            notifyIcon.Visible = true;
+
+            if (DataStore.GetInstance().Store.Authentication == null)
             {
-                Thread.Sleep(10000);
-                TwitchFetcher.GetInstance().GetLiveFollowingUsers();
+                TriggerAuthentication();
             }
-        }).Start();
 
-        Application.Run();
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    Thread.Sleep(10000);
+                    TwitchFetcher.GetInstance().GetLiveFollowingUsers();
+                }
+            }).Start();
+
+            Application.Run();
+        }
+        catch (Exception e) {
+            Console.WriteLine(e.ToString());
+        }
 
     }
 }

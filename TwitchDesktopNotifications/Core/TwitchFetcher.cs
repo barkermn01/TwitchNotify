@@ -1,6 +1,4 @@
-﻿using ABI.System;
-using Microsoft.Extensions.Configuration;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -14,9 +12,8 @@ namespace TwitchDesktopNotifications.Core
     internal class TwitchFetcher
     {
         private TwitchFetcher() {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-            TwitchClientID = config["TwitchClientID"];
-            TwitchClientSecret = config["TwitchClientSecret"];
+            TwitchClientID = "";
+            TwitchClientSecret = "";
         }
 
         public static TwitchFetcher instance { get; private set; }

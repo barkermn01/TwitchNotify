@@ -40,6 +40,10 @@ namespace TwitchDesktopNotifications
             String FileName = "store.json";
 
             string fileContent = JsonSerializer.Serialize<JsonStructure.Store>(Store);
+
+            Console.WriteLine("I'm trying to save:");
+            Console.WriteLine(fileContent);
+            Console.WriteLine("to {0}", FilePath + "/" + FileName);
             Directory.CreateDirectory(FilePath);
             File.WriteAllText(FilePath + "/" + FileName, fileContent);
         }
