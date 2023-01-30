@@ -10,12 +10,14 @@ This will be fixed when this project moves out of Beta only.
 
 ## How to use
 **How to Exit:**
+
 To exit you will have a Notification Icon / Tray icon where you can quit the application.
 
 ![Showing windows Notification Icon Area also known as the Tray Area](https://user-images.githubusercontent.com/37368/215226270-52d596d5-7811-4389-a761-3aabad7da360.png)
 
 **What it looks like:**
-![Example of the Notification ](https://user-images.githubusercontent.com/37368/215226419-0ec644f1-bd2b-498f-93ed-a48acd3c824c.png)
+
+![Example of the Notification](https://user-images.githubusercontent.com/37368/215226419-0ec644f1-bd2b-498f-93ed-a48acd3c824c.png)
 
 ## Development
 
