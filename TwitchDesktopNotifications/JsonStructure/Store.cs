@@ -17,5 +17,8 @@ namespace TwitchDesktopNotifications.JsonStructure
 
         [JsonPropertyName("user_data")]
         public UserData UserData { get; set; }
+
+        [JsonPropertyName("notifications_for")]
+        public SteamersToNotify SteamersToNotify { get; set; };
     }
 }

@@ -126,7 +126,14 @@ namespace TwitchDesktopNotifications.Core
                 currentlyLive = following.Data;
             }catch(System.Exception ex)
             {
-                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
+                if (!ex.Message.Contains("Notification"))
+                {
+                    MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
+                }
+                else
+                {
+                    MessageBox.Show("Unable to use Windows Notifications.", "Twitch Notify");
+                }
             }
 }
 
