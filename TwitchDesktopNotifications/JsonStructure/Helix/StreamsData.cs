@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktopNotifications.JsonStructure.Helix
 {
-    internal class StreamsData
+    public class StreamsData
     {
         public StreamsData() { }
 

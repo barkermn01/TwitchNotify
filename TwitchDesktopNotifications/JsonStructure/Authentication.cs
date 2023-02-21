@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktopNotifications.JsonStructure
 {
-    internal class Authentication
+    public class Authentication
     {
         [JsonPropertyName("access_token")]
         public string AccessToken { get; set; }

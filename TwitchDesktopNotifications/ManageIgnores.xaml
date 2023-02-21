@@ -1,0 +1,50 @@
+﻿<Window x:Class="TwitchDesktopNotifications.ManageIgnores"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TwitchDesktopNotifications"
+        xmlns:core="clr-namespace:TwitchDesktopNotifications.Core"
+        mc:Ignorable="d"
+        Title="Manage Ignored Streamers" Height="435" Width="395" ResizeMode="NoResize">
+    <Window.DataContext>
+        <core:UIStreamer />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="300" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <DataGrid 
+            Grid.Column="1" Grid.ColumnSpan="3" 
+            Grid.RowSpan="1" Grid.Row="3" 
+            x:Name="dgrdIgnore" ItemsSource="{Binding StreamersToIgnore}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Streamer Name" Binding="{Binding Name}" IsReadOnly="True" />
+                <DataGridHyperlinkColumn Header="Streamer Link" Binding="{Binding Link}" IsReadOnly="True" />
+                <DataGridCheckBoxColumn Header="Ignore" Binding="{Binding IsIgnored}"  IsReadOnly="False">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style>
+                            <EventSetter Event="CheckBox.Checked" Handler="OnChecked" />
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Close" Grid.Column="3" Grid.Row="5" Click="CloseBtn_Click" />
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="Changes to the ignore list are automatically saved." VerticalAlignment="Top"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" TextWrapping="Wrap" Text="If you can't see a streamer Twitch Notify has not seen them." VerticalAlignment="Bottom"/>
+    </Grid>
+</Window>
