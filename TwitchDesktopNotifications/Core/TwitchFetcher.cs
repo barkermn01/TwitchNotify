@@ -165,6 +165,7 @@ namespace TwitchDesktopNotifications.Core
                         if (!found)
                         {
                             UserData streamer = FetchUserData(x.UserId);
+                            UIStreamer.GetCreateStreamer(x.DisplayName);
                             Notification.GetInstance().sendNotification(streamer.DisplayName, "https://twitch.tv/" + streamer.UserName, streamer.ProfileImage, x.ThumbnailImg, x.Title);
                         }
                     });
