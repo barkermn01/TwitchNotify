@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktopNotifications.JsonStructure.Helix
 {
-    internal class Pagination
+    public class Pagination
     {
         public Pagination() { }
 

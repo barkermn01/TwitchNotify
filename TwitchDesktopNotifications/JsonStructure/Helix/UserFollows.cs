@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchDesktopNotifications.JsonStructure.Helix
 {
-    internal class UserFollows
+    public class UserFollows
     {
         public UserFollows() { }
 

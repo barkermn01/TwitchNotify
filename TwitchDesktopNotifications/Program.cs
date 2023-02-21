@@ -18,6 +18,7 @@ internal class Program
 
     private static NotifyIcon notifyIcon;
     private static ContextMenuStrip cms;
+    private static ManageIgnores manageIgnores;
 
     public static void Ws_CodeRecived(object? sender, EventArgs e)
     {
@@ -45,6 +46,21 @@ internal class Program
         TriggerAuthentication();
     }
 
+    protected static void ManageIgnores_Click(object? sender, System.EventArgs e)
+    {
+        if (manageIgnores == null) {
+            manageIgnores = new ManageIgnores();
+            manageIgnores.Closed += ManageIgnores_Closed;
+        }
+        manageIgnores.Show();
+        manageIgnores.Focus();
+    }
+
+    private static void ManageIgnores_Closed(object? sender, EventArgs e)
+    {
+        manageIgnores = null;
+    }
+
     protected static void Quit_Click(object? sender, System.EventArgs e)
     {
         notifyIcon.Visible = false;
@@ -62,12 +78,13 @@ internal class Program
         {
             if (isConnecting)
             {
-                MessageBox.Show("Twitch Connection not authenticated you need to Reconnect it.", "Twitch Notify");
+                TwitchFetcher.GetInstance().OpenFailedNotification();
             }
         }
     }
 
-    private static async Task Main(string[] args)
+    [STAThread]
+    private static void Main(string[] args)
     {
         try
         {
@@ -78,7 +95,8 @@ internal class Program
             notifyIcon.Text = "Twitch Notify";
 
             cms = new ContextMenuStrip();
-
+            cms.Items.Add(new ToolStripMenuItem("Manage Ignores", null, new EventHandler(ManageIgnores_Click)));
+            cms.Items.Add(new ToolStripSeparator());
             cms.Items.Add(new ToolStripMenuItem("Reconnect", null, new EventHandler(Reconnect_Click)));
             cms.Items.Add(new ToolStripSeparator());
             cms.Items.Add(new ToolStripMenuItem("Quit", null, new EventHandler(Quit_Click), "Quit"));
@@ -91,7 +109,7 @@ internal class Program
                 TriggerAuthentication();
             }
 
-            new Thread(() =>
+            Thread thread = new Thread(() =>
             {
                 while (true)
                 {
@@ -101,12 +119,14 @@ internal class Program
                         TwitchFetcher.GetInstance().GetLiveFollowingUsers();
                     }
                 }
-            }).Start();
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
 
             Application.Run();
         }
         catch (Exception e) {
-            Console.WriteLine(e.ToString());
+            Logger.GetInstance().Writer.WriteLineAsync(e.ToString());
         }
 
     }

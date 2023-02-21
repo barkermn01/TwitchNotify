@@ -10,12 +10,14 @@ using Windows.Foundation.Collections;
 using System.Diagnostics;
 using System.ComponentModel;
 using Windows.UI.Notifications;
+using System.Net.Http;
 
 namespace TwitchDesktopNotifications.Core
 {
-    internal class Notification
+    public class Notification : SingletonFactory<Notification>, Singleton
     {
-        private Notification() {
+        private WebClient webClient = new WebClient();
+        public Notification() {
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
                 // Obtain the arguments from the notification
@@ -34,20 +36,14 @@ namespace TwitchDesktopNotifications.Core
                         myProcess.StartInfo.UseShellExecute = true;
                         myProcess.StartInfo.FileName = args["streamerUrl"];
                         myProcess.Start();
+                    }else if( args.Contains("action") && args["action"] == "ignore")
+                    {
+                        NotifyManager.AddStreamerToIgnoreList(args["streamerName"]);
                     }
-                }catch(Exception ex) { }
+                }catch(Exception ex) {
+                    Logger.GetInstance().Writer.WriteLine(ex.ToString());
+                }
             };
-        }
-
-        private static Notification Instance;
-        
-        public static Notification GetInstance()
-        {
-            if(Instance == null)
-            {
-                Instance = new Notification();
-            }
-            return Instance;
         }
 
         public void sendNotification(String streamerName, String streamerUrl, String profilePic, String streamThumbnail, String title)
@@ -60,52 +56,64 @@ namespace TwitchDesktopNotifications.Core
             string fileNameProfilePic = profilePic.Split("/").Last();
             if (!File.Exists(FilePath + "/" + fileNameProfilePic))
             {
-                (new WebClient()).DownloadFile(new Uri(profilePic), FilePath + "/" + fileNameProfilePic);
+                webClient.DownloadFile(new Uri(profilePic), FilePath + "/" + fileNameProfilePic);
             }
 
             // download there profile picture
             string fileNameThumbnailPic = streamThumbnail.Split("/").Last();
-            (new WebClient()).DownloadFile(new Uri(streamThumbnail), 
+            webClient.DownloadFile(new Uri(streamThumbnail), 
                 FilePath + "/" + fileNameThumbnailPic
             );
 
-            var builder = new ToastContentBuilder()
-                .AddArgument("streamerUrl", streamerUrl)
-                .AddArgument("thumbnail_path", FilePath + "/" + fileNameThumbnailPic)
-                .AddText(streamerName + " is now live on Twitch")
-                .AddHeroImage(new Uri("file://" + (FilePath + "/" + fileNameThumbnailPic).Replace("\\", "/")))
-                .AddAppLogoOverride(new Uri("file://" + (FilePath + "/" + fileNameProfilePic).Replace("\\", "/")), ToastGenericAppLogoCrop.Circle)
-                .AddButton(new ToastButton()
-                    .SetContent("Watch " + streamerName)
-                    .AddArgument("action", "watch")
-                    .SetBackgroundActivation())
-                .AddButton(new ToastButton()
-                    .SetContent("Dismiss")
-                    .AddArgument("action", "nothing")
-                    .SetBackgroundActivation());
-
-            if(title != "") {
-                builder.AddText(title);
-            }
-            builder.Show(toast =>
+            if (NotifyManager.ShouldNotify(streamerName))
             {
-                toast.ExpirationTime = DateTime.Now.AddSeconds(15);
-                toast.Dismissed += (ToastNotification sender, ToastDismissedEventArgs args) =>
+                var builder = new ToastContentBuilder()
+                    .AddArgument("streamerUrl", streamerUrl)
+                    .AddArgument("streamerName", streamerName)
+                    .AddArgument("thumbnail_path", FilePath + "/" + fileNameThumbnailPic)
+                    .AddText(streamerName + " is now live on Twitch")
+                    .AddHeroImage(new Uri("file://" + (FilePath + "/" + fileNameThumbnailPic).Replace("\\", "/")))
+                    .AddAppLogoOverride(new Uri("file://" + (FilePath + "/" + fileNameProfilePic).Replace("\\", "/")), ToastGenericAppLogoCrop.Circle)
+                    .AddButton(new ToastButton()
+                        .SetContent("Watch ")
+                        .AddArgument("action", "watch")
+                        .SetBackgroundActivation())
+                    .AddButton(new ToastButton()
+                        .SetContent("Dismiss")
+                        .AddArgument("action", "nothing")
+                        .SetBackgroundActivation())
+                    .AddButton(new ToastButton()
+                        .SetContent("Ignore")
+                        .AddArgument("action", "ignore")
+                        .SetBackgroundActivation());
+
+                if (title != "")
                 {
-                    try
-                    {
-                        File.Delete(FilePath + "/" + fileNameThumbnailPic);
-                    }catch(Exception) { }
-                };
-                toast.Activated += (ToastNotification sender, object args) =>
+                    builder.AddText(title);
+                }
+                builder.Show(toast =>
                 {
-                    try
+                    toast.ExpirationTime = DateTime.Now.AddSeconds(15);
+                    toast.Dismissed += (ToastNotification sender, ToastDismissedEventArgs args) =>
                     {
-                        File.Delete(FilePath + "/" + fileNameThumbnailPic);
-                    }
-                    catch (Exception) { }
-                };
-            });
+                        try
+                        {
+                            File.Delete(FilePath + "/" + fileNameThumbnailPic);
+                        }
+                        catch (Exception) { }
+                        builder = null;
+                    };
+                    toast.Activated += (ToastNotification sender, object args) =>
+                    {
+                        try
+                        {
+                            File.Delete(FilePath + "/" + fileNameThumbnailPic);
+                        }
+                        catch (Exception) { }
+                        builder = null;
+                    };
+                });
+            }
         }
     }
 }

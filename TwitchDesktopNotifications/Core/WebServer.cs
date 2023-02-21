@@ -5,22 +5,11 @@ using System.IO;
 
 namespace TwitchDesktopNotifications.Core
 {
-    internal class WebServer
+    public class WebServer : SingletonFactory<WebServer>, Singleton
     {
         public int Port = 32584;
 
         private HttpListener listener;
-
-        private static WebServer Instance;
-
-        public static WebServer GetInstance()
-        {
-            if(Instance == null)
-            {
-                Instance= new WebServer();
-            }
-            return Instance;
-        }
 
         public String TwitchCode { get; private set; }
         public String TwitchState { get; set; }
