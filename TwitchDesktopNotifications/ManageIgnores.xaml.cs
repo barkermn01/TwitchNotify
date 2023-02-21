@@ -25,11 +25,6 @@ namespace TwitchDesktopNotifications
             this.Close();
         }
 
-        private void dgrdIgnore_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => dgrdIgnore.UnselectAll()));
-        }
-
         private void HyperLink_Click(object sender, RoutedEventArgs e)
         {
             string link = ((Hyperlink)e.OriginalSource).NavigateUri.OriginalString;
