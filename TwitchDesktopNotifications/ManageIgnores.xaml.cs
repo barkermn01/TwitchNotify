@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Threading;
 using TwitchDesktopNotifications.Core;
 
 namespace TwitchDesktopNotifications
@@ -9,7 +13,6 @@ namespace TwitchDesktopNotifications
     /// </summary>
     public partial class ManageIgnores : Window
     {
-        private bool updated = false;
         public ManageIgnores()
         {
             InitializeComponent();
@@ -22,9 +25,21 @@ namespace TwitchDesktopNotifications
             this.Close();
         }
 
-        private void OnChecked(object sender, RoutedEventArgs e)
+        private void dgrdIgnore_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            updated= true;
+            Dispatcher.BeginInvoke(DispatcherPriority.Render, new Action(() => dgrdIgnore.UnselectAll()));
+        }
+
+        private void HyperLink_Click(object sender, RoutedEventArgs e)
+        {
+            string link = ((Hyperlink)e.OriginalSource).NavigateUri.OriginalString;
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = link,
+                UseShellExecute = true
+            };
+            Process.Start(psi);
         }
     }
 }
