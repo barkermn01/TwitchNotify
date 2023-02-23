@@ -29,7 +29,8 @@ namespace TwitchDesktopNotifications.Core
             get { 
                 if(sw == null)
                 {
-                    sw = new StreamWriter(_name);
+                    String FilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "TwitchNotify");
+                    sw = new StreamWriter(FilePath+_name);
                 }
                 return sw; 
             } 

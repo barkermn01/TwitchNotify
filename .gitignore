@@ -7,3 +7,12 @@
 /.vs
 /TwitchDesktopNotifications/App.config
 /TwitchDesktopNotifications/TwitchDetails.cs
+/Twitchy-SetupFiles/TwitchySetup.msi
+/Twitchy-SetupFiles/TwitchySetup.exe
+/Twitchy-cache/part1/Twitchy1.cab
+/Twitchy-cache/part1/output-info.ini
+/Twitchy-cache/part1
+/Twitchy-cache/cacheIndex.txt
+/Twitchy-cache
+/TwitchDesktopNotifications/Twitchy.zip
+/SetupFiles

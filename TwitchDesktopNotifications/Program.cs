@@ -98,6 +98,7 @@ internal class Program
             cms.Items.Add(new ToolStripMenuItem("Manage Ignores", null, new EventHandler(ManageIgnores_Click)));
             cms.Items.Add(new ToolStripSeparator());
             cms.Items.Add(new ToolStripMenuItem("Reconnect", null, new EventHandler(Reconnect_Click)));
+            //cms.Items.Add(new ToolStripMenuItem("About", null, new EventHandler(About_Click), "Quit"));
             cms.Items.Add(new ToolStripSeparator());
             cms.Items.Add(new ToolStripMenuItem("Quit", null, new EventHandler(Quit_Click), "Quit"));
 

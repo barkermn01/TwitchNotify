@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TwitchDesktopNotifications"
         xmlns:core="clr-namespace:TwitchDesktopNotifications.Core"
         mc:Ignorable="d"
-        Title="Manage Ignored Streamers" Height="435" Width="395" ResizeMode="CanResizeWithGrip">
+        Title="Twitchy: Ignored Streamers" Height="435" Width="395" ResizeMode="CanResizeWithGrip">
     <Window.DataContext>
         <core:UIStreamer />
     </Window.DataContext>

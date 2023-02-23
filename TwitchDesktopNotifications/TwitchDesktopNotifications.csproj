@@ -6,12 +6,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
-    <PackageId>Twitch Notify</PackageId>
-    <Authors>KeareanGaming</Authors>
-    <AssemblyName>Twitch Notify</AssemblyName>
+    <PackageId>Twitchy</PackageId>
+    <Authors>Martin Barker (KeatranGaming)</Authors>
+    <AssemblyName>Twitchy</AssemblyName>
     <UseWPF>True</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <UserSecretsId>2dfb7064-609b-41c3-a80d-a9e4d842a55d</UserSecretsId>
+    <SignAssembly>False</SignAssembly>
+    <Description>Show Windows notifications when your fav streamers go live.</Description>
+    <Copyright>2023 Martin Barker</Copyright>
+    <PackageProjectUrl>https://github.com/barkermn01/TwitchNotify/</PackageProjectUrl>
+    <PackageIcon>twitch.png</PackageIcon>
+    <RepositoryUrl>https://github.com/barkermn01/TwitchNotify/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>twitch, notifications</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +38,19 @@
     </None>
     <None Update="Assets\twitch.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="sign.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="powershell -command &quot;if('$(ConfigurationName)' -eq 'Release'){ cd $(TargetDir); ./sign.ps1}&quot;" />
+  </Target>
 
 </Project>

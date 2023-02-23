@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TwitchDesktopNotifications"
         mc:Ignorable="d"
-        Title="Twitch Disconnected" Height="140" Width="335" x:Name="reconnectionNeededWin">
+        Title="Twitchy Disconnected" Height="140" Width="335" x:Name="reconnectionNeededWin">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
