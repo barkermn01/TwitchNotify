@@ -93,7 +93,7 @@ namespace TwitchDesktopNotifications.Core
                 }
                 builder.Show(toast =>
                 {
-                    toast.ExpirationTime = DateTime.Now.AddSeconds(15);
+                    toast.ExpirationTime = DateTime.Now.AddMinutes(10);
                     toast.Dismissed += (ToastNotification sender, ToastDismissedEventArgs args) =>
                     {
                         try
