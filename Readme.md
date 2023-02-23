@@ -1,4 +1,6 @@
-# Twitch Notify
+# Twitchy
+The Twitch windows desktop notification system.
+
 ## Not affiliated with Twitch or Amazon
 
 Please note that currently this is a BETA as such it does not add it's self to windows start up if you wish to add this to start up for now you can just create a shortcut to the `Twitch Notify.exe` in the directory `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup`,
