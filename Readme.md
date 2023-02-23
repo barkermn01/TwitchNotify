@@ -3,12 +3,9 @@ The Twitch windows desktop notification system.
 
 ## Not affiliated with Twitch or Amazon
 
-Please note that currently this is a BETA as such it does not add it's self to windows start up if you wish to add this to start up for now you can just create a shortcut to the `Twitch Notify.exe` in the directory `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup`,
-
-This will be fixed when this project moves out of Beta only.
-
 ## Installation
  Twitch Notify Requires [.NET 6 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-6.0.13-windows-x64-installer).
+ As of RC-1 There is now a Setup that will install into auto run aswell 
 
 ## How to use
 **How to Exit:**
