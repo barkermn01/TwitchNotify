@@ -6,10 +6,61 @@
         xmlns:local="clr-namespace:TwitchDesktopNotifications"
         xmlns:core="clr-namespace:TwitchDesktopNotifications.Core"
         mc:Ignorable="d"
-        Title="Twitchy: Ignored Streamers" Height="435" Width="395" ResizeMode="CanResizeWithGrip">
+        Title="Twitchy: Ignored Streamers" Height="435" Width="395" ResizeMode="CanResizeWithGrip" Background="#FF333333">
     <Window.DataContext>
         <core:UIStreamer />
     </Window.DataContext>
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="GotFocusColor" Color="#FF333333" />
+        <SolidColorBrush x:Key="LostFocusColor" Color="#FF333333" />
+
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Foreground" Value="#FFB3B3B3"/>
+            <Setter Property="Background" Value="#FF333333"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Foreground" Value="#FFB3B3B3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FF262626"/>
+                </Trigger>
+
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="#FF383838"/>
+                </Trigger>
+
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="#FF333333"/>
+                </Trigger>
+
+                <EventTrigger RoutedEvent="DataGrid.GotFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource GotFocusColor}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <EventTrigger RoutedEvent="DataGrid.LostFocus">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
+                                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource LostFocusColor}" />
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
@@ -29,7 +80,7 @@
             Grid.Column="1" 
             Grid.RowSpan="1" Grid.Row="3" 
             CanUserResizeColumns="False"
-            x:Name="dgrdIgnore" ItemsSource="{Binding StreamersToIgnore}" AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="0" HeadersVisibility="Column">
+            x:Name="dgrdIgnore" ItemsSource="{Binding StreamersToIgnore}" AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="0" HeadersVisibility="Column" Background="#FF333333">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Ignore" Binding="{Binding IsIgnored}" IsReadOnly="False" Width="50">
                 </DataGridCheckBoxColumn>
@@ -48,8 +99,8 @@
                 <SolidColorBrush Color="#000"  x:Key="{x:Static SystemColors.HighlightTextBrushKey}" />
             </DataGrid.Resources>
         </DataGrid>
-        <Button Content="Close" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Grid.Row="5" Click="CloseBtn_Click" />
-        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="Changes to the ignore list are automatically saved." VerticalAlignment="Top"/>
-        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="If you can't see a streamer Twitch Notify has not seen them." VerticalAlignment="Bottom"/>
+        <Button Content="Close" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Grid.Row="5" Click="CloseBtn_Click" Background="#FF878788" Foreground="#FF391265" />
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="Changes to the ignore list are automatically saved." VerticalAlignment="Top" Foreground="#FFF9F6F6"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="If you can't see a streamer Twitch Notify has not seen them." VerticalAlignment="Bottom" Foreground="#FFF9F6F6"/>
     </Grid>
 </Window>

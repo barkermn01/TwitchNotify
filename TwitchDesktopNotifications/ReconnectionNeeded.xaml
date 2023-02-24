@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TwitchDesktopNotifications"
         mc:Ignorable="d"
-        Title="Twitchy Disconnected" Height="140" Width="335" x:Name="reconnectionNeededWin">
+        Title="Twitchy Disconnected" Height="140" Width="335" x:Name="reconnectionNeededWin" Background="#FF333333">
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="100" />
@@ -20,8 +21,8 @@
             <RowDefinition Height="10" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Text="We have been unable to refresh your twitch connection" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"/>
-        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Text="Don't worry you just need to reconnect" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"/>
-        <Button Content="Thanks" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2" Grid.Row="3" Padding="5" Click="Button_Click"/>
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Text="We have been unable to refresh your twitch connection" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FFF9F6F6"/>
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Text="Don't worry you just need to reconnect" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Foreground="#FFF9F6F6"/>
+        <Button Content="Thanks" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="2" Grid.Row="3" Padding="5" Click="Button_Click" Background="#FF878788" Foreground="#FF391265"/>
     </Grid>
 </Window>

@@ -95,6 +95,9 @@ internal class Program
             notifyIcon.Text = "Twitch Notify";
 
             cms = new ContextMenuStrip();
+            cms.BackColor = System.Drawing.Color.FromArgb(51, 51, 51);
+            cms.ForeColor = System.Drawing.Color.FromArgb(145, 70, 255);
+            cms.ShowImageMargin= false;
             cms.Items.Add(new ToolStripMenuItem("Manage Ignores", null, new EventHandler(ManageIgnores_Click)));
             cms.Items.Add(new ToolStripSeparator());
             cms.Items.Add(new ToolStripMenuItem("Reconnect", null, new EventHandler(Reconnect_Click)));
