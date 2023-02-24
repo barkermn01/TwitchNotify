@@ -22,6 +22,8 @@
     <PackageTags>twitch, notifications</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Configurations>Debug;Release;ReleaseSign</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -50,7 +52,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="powershell -command &quot;if('$(ConfigurationName)' -eq 'Release'){ cd $(TargetDir); ./sign.ps1}&quot;" />
+    <Exec Command="powershell -command &quot;if('$(ConfigurationName)' -eq 'ReleaseSign'){ cd $(TargetDir); ./sign.ps1}&quot;" />
   </Target>
 
 </Project>

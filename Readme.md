@@ -31,8 +31,9 @@ To exit you will have a Notification Icon / Tray icon where you can quit the app
 
 Want to contribute? Great!
 
-Project is built using Visual Studios 2022, please make sure you have added support for .NET 6, You will also requrie the Windows SDK (10.0.17763.0),
-If your unable to code sign you can build in "Debug" mode or remove the Post-build event in the project settings.
+Project is built using Visual Studios 2022, please make sure you have added support for .NET 6, You will also requrie the Windows SDK (10.0.17763.0)
+
+If your unable to code sign you can build configuration to "Debug" or "Release" mode the signing script will only run if set to "ReleaseSign".
 
 You need to create Application to obtain a ID and Secret on [Twitch Developer Console](https://dev.twitch.tv/console)
 Add a new C# Class to the project named `TwitchDetails.cs` add the following code with your ID and Secret
