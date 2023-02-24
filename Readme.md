@@ -11,21 +11,26 @@ The Twitch windows desktop notification system.
 **How to Manage Ignores:**
 1. Click "Manage Ignores" from the right click notification area icon
 
-![Image of Context Menu from Notification / Tray Icon ](https://user-images.githubusercontent.com/37368/220464000-3aa632e0-1eb8-4be0-8d06-613bf9ea96f6.png)
+![Image of Context Menu from Notification / Tray Icon](https://user-images.githubusercontent.com/37368/221084256-c9317bbf-ec39-48ee-8d02-325997d0d200.png)
 
 2, the following form will open where you can manage streamers that should be ignored
 
-![image of manage ignores UI](https://user-images.githubusercontent.com/37368/220468049-70bb423d-e16c-49ff-a9e7-4135df9ebc15.png)
+![Image of Ignored Streamers UI](https://user-images.githubusercontent.com/37368/221084417-165afc63-1926-41f0-be36-e18e8c46318f.png)
+
 
 _Something to note:_
 Making changes inside the form is saved automatically
 Streamers won't appear in the form until they have been seen 
 
 **How to Exit:**
-
 To exit you will have a Notification Icon / Tray icon where you can quit the application.
 
-![Image of Context Menu from Notification / Tray Icon ](https://user-images.githubusercontent.com/37368/220464000-3aa632e0-1eb8-4be0-8d06-613bf9ea96f6.png)
+![Image of Context Menu from Notification / Tray Icon](https://user-images.githubusercontent.com/37368/221084256-c9317bbf-ec39-48ee-8d02-325997d0d200.png)
+
+
+**What it looks like:**
+
+![Example of notification ](https://user-images.githubusercontent.com/37368/221086733-3a379a9b-6630-4edd-a7e5-e43815e47609.png)
 
 ## Development
 
