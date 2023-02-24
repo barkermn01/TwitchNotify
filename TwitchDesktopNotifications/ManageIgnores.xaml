@@ -29,7 +29,7 @@
             Grid.Column="1" 
             Grid.RowSpan="1" Grid.Row="3" 
             CanUserResizeColumns="False"
-            x:Name="dgrdIgnore" ItemsSource="{Binding StreamersToIgnore}" AutoGenerateColumns="False" CanUserAddRows="False">
+            x:Name="dgrdIgnore" ItemsSource="{Binding StreamersToIgnore}" AutoGenerateColumns="False" CanUserAddRows="False" RowHeaderWidth="0" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Ignore" Binding="{Binding IsIgnored}" IsReadOnly="False" Width="50">
                 </DataGridCheckBoxColumn>
