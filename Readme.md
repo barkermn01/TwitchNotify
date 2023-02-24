@@ -63,6 +63,15 @@ Project Requests `CommunityToolkit-MainLatest` NuGET Package Source
 6. Click Update
 7. Click Ok
 
+### Thanks
+A Huge Thanks to [CaspersGG](https://twitch.tv/CaspersGG) for coming up with this idea.
+Thanks to the following streamers for testing and promoting this application: 
+1. [Uprisen](https://twitch.tv/uprisen)
+2. [Anthogator](https://www.twitch.tv/anthogator)
+3. [Strife98](https://www.twitch.tv/strife98)
+4. [petfriendamy_](https://www.twitch.tv/petfriendamy_)
+5. [Roxas997](https://www.twitch.tv/roxas997)
+6. [Anthogator](https://www.twitch.tv/anthogator)
 
 ## License
 
