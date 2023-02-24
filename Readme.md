@@ -14,7 +14,8 @@ The Twitch windows desktop notification system.
 ![Image of Context Menu from Notification / Tray Icon ](https://user-images.githubusercontent.com/37368/220464000-3aa632e0-1eb8-4be0-8d06-613bf9ea96f6.png)
 
 2, the following form will open where you can manage streamers that should be ignored
-![image](https://user-images.githubusercontent.com/37368/220468049-70bb423d-e16c-49ff-a9e7-4135df9ebc15.png)
+
+![image of manage ignores UI](https://user-images.githubusercontent.com/37368/220468049-70bb423d-e16c-49ff-a9e7-4135df9ebc15.png)
 
 _Something to note:_
 Making changes inside the form is saved automatically
