@@ -22,6 +22,7 @@ Making changes inside the form is saved automatically
 Streamers won't appear in the form until they have been seen 
 
 **How to Exit:**
+
 To exit you will have a Notification Icon / Tray icon where you can quit the application.
 
 ![Image of Context Menu from Notification / Tray Icon ](https://user-images.githubusercontent.com/37368/220464000-3aa632e0-1eb8-4be0-8d06-613bf9ea96f6.png)
