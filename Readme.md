@@ -1,6 +1,8 @@
 # Twitchy
 The Twitch windows desktop notification system.
 
+[![Paypal Donate Btn](https://user-images.githubusercontent.com/37368/221199123-871cff69-fdb5-4dc3-8f3c-35efff4ce670.png)](https://www.paypal.com/donate/?hosted_button_id=9YUH3GCJ83A4G)
+
 ## Not affiliated with Twitch or Amazon
 
 ## Installation
