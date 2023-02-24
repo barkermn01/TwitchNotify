@@ -9,6 +9,10 @@
   #define MyAppTargetFramework "net6.0-windows"
 #endif
 
+#ifndef SourceDir
+  #define SourceDir "TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\"
+#endif
+
 #define public Dependency_NoExampleSetup
 #include "CodeDependencies.iss"
 
@@ -34,6 +38,7 @@ WizardStyle=modern
 ArchitecturesInstallIn64BitMode=x64
 SignedUninstaller=yes
 SignTool=signtool
+SourceDir=.\
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -42,18 +47,20 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Twitchy.deps.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Twitchy.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Twitchy.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Assets\icon.ico"; DestDir: "{app}\Assets"; Flags: ignoreversion
-Source: ".\TwitchDesktopNotifications\bin\Release\net6.0-windows10.0.17763.0\Assets\twitch.png"; DestDir: "{app}\Assets"; Flags: ignoreversion
+Source: "{#SourceDir}{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Microsoft.Windows.SDK.NET.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Twitchy.deps.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Twitchy.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Twitchy.runtimeconfig.json"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}WinRT.Runtime.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SourceDir}Assets\icon.ico"; DestDir: "{app}\Assets"; Flags: ignoreversion
+Source: "{#SourceDir}Assets\twitch.png"; DestDir: "{app}\Assets"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "netcorecheck.exe"; Flags: dontcopy noencryption
 Source: "netcorecheck_x64.exe"; Flags: dontcopy noencryption
+
+#expr SaveToFile("Preprocessed.iss")
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
