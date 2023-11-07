@@ -72,14 +72,9 @@ $appArgs = 'sign',
 $appArgs = $appArgs + $files;
 
 #run the signtool
-#signtool $appArgs;
+signtool $appArgs;
 
 # once files are signed package into zip
 Get-ChildItem './' | where { $_.Name -notin 'sign.ps1'} | Compress-Archive -DestinationPath 'Twitchy.zip' -Update
 
-$setupArgs = 
-	'/pu+',
-	'/DSourceDir=TwitchDesktopNotifications\bin\x64\ReleaseSign\net6.0-windows10.0.17763.0\',
-	'../../../../../setup.iss';
-iscc $setupArgs
 Exit $LASTEXITCODE

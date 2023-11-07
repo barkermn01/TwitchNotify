@@ -549,8 +549,7 @@ end;
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{7774CEEE-6785-48B9-BA35-6B842F947A21}
 AppName=Twitchy
-AppVersion=0.4.1
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVersion=0.5
 DefaultDirName={autopf}\Twitchy
 DisableProgramGroupPage=yes
 LicenseFile=.\TwitchDesktopNotifications\Lisence.rtf

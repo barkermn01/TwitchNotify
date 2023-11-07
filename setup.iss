@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Twitchy"
-#define MyAppVersion "0.4.2"
+#define MyAppVersion "0.5"
 #define MyAppExeName "Twitchy.exe"
 
 #ifndef MyAppTargetFramework

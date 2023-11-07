@@ -5,11 +5,12 @@ using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Media;
+using System.Threading;
 using TwitchDesktopNotifications;
 using TwitchDesktopNotifications.Core;
 using TwitchDesktopNotifications.JsonStructure;
+using Windows.UI.Core.Preview;
 
 internal class Program
 {
@@ -19,7 +20,7 @@ internal class Program
 
     private static NotifyIcon notifyIcon;
     private static ContextMenuStrip cms;
-    private static ManageIgnores manageIgnores;
+    private static ManageIgnores? manageIgnores;
 
     public static void Ws_CodeRecived(object? sender, EventArgs e)
     {
@@ -83,14 +84,11 @@ internal class Program
             }
         }
     }
-
     [STAThread]
     private static void Main(string[] args)
     {
         try
         {
-            var timer = new PeriodicTimer(TimeSpan.FromSeconds(10));
-
             notifyIcon = new NotifyIcon();
             notifyIcon.Icon = new Icon("Assets/icon.ico");
             notifyIcon.Text = "Twitch Notify";
@@ -114,19 +112,14 @@ internal class Program
                 TriggerAuthentication();
             }
 
-            Thread thread = new Thread(() =>
-            {
-                while (true)
+            var autoEvent = new AutoResetEvent(false);
+            var timer = new System.Threading.Timer((Object? stateInfo) => {
+                if (DataStore.GetInstance().Store != null)
                 {
-                    Thread.Sleep(10000);
-                    if (DataStore.GetInstance().Store != null)
-                    {
-                        TwitchFetcher.GetInstance().GetLiveFollowingUsers();
-                    }
+                    TwitchFetcher.GetInstance().GetLiveFollowingUsers();
                 }
-            });
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
+            }, autoEvent, 1000, 500);
+            
 
             Application.Run();
 
