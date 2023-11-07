@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Twitchy"
-#define MyAppVersion "0.4.0"
+#define MyAppVersion "0.4.2"
 #define MyAppExeName "Twitchy.exe"
 
 #ifndef MyAppTargetFramework
@@ -22,7 +22,6 @@
 AppId={{7774CEEE-6785-48B9-BA35-6B842F947A21}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=.\TwitchDesktopNotifications\Lisence.rtf
@@ -32,6 +31,7 @@ OutputDir=.\SetupFiles
 OutputBaseFilename=TwitchySetup
 SetupIconFile=.\TwitchDesktopNotifications\Assets\icon.ico
 UninstallDisplayIcon=.\TwitchDesktopNotifications\Assets\icon.ico
+WizardSmallImageFile=.\TwitchDesktopNotifications\Assets\twitch.bmp
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -45,6 +45,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "autostarticon"; Description: "{cm:AutoStartProgram,{#MyAppName}}"; GroupDescription: "{cm:AdditionalIcons}";
 
 [Files]
 Source: "{#SourceDir}{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
@@ -65,12 +66,10 @@ Source: "netcorecheck_x64.exe"; Flags: dontcopy noencryption
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: autostarticon
 
 [Run]
 Filename: {app}\{cm:AppName}.exe; Description: {cm:LaunchProgram,{cm:AppName}}; Flags: nowait postinstall skipifsilent
-
-[Registry]
-Root: HKCU; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "Twitchy"; ValueData: """{app}\{#MyAppExeName}"""; Flags: uninsdeletevalue
 
 [CustomMessages]
 AppName=Twitchy

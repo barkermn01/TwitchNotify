@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Microsoft.Toolkit.Uwp.Notifications;
 using System.Drawing;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
@@ -128,6 +129,10 @@ internal class Program
             thread.Start();
 
             Application.Run();
+
+            Application.ApplicationExit += (object? sender, EventArgs e) => {
+                ToastNotificationManagerCompat.Uninstall();
+            };
         }
         catch (Exception e) {
             Logger.GetInstance().Writer.WriteLineAsync(e.ToString());
